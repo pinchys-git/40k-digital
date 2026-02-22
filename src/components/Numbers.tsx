@@ -12,29 +12,28 @@ interface Stat {
 
 const stats: Stat[] = [
   {
-    prefix: '$',
-    value: 525,
-    suffix: 'M+',
-    label: 'Exits Guided',
-    description: 'Total enterprise value across acquisitions guided by our strategy',
+    value: 30,
+    suffix: '+',
+    label: 'Brands Scaled',
+    description: 'From startups to Fortune 500 — growth systems built across every vertical',
   },
   {
     value: 20,
     suffix: '+',
-    label: 'Years Experience',
-    description: 'Decades of performance marketing expertise, now AI-amplified',
+    label: 'Years In The Arena',
+    description: 'Two decades of performance marketing, now amplified by autonomous AI',
   },
   {
-    value: 40,
-    suffix: '%',
-    label: 'YoY Growth',
-    description: 'Average subscriber growth delivered across major streaming clients',
+    value: 10,
+    suffix: 'X',
+    label: 'Revenue Multiplier',
+    description: 'Average account revenue growth delivered through data-driven strategy',
   },
   {
-    value: 1,
-    suffix: 'M+',
-    label: 'Subscribers Scaled',
-    description: 'Paying subscribers acquired across platform growth campaigns',
+    value: 3,
+    suffix: '',
+    label: 'AI Products Shipped',
+    description: 'Custom-built autonomous systems running in production today',
   },
 ]
 
@@ -204,8 +203,8 @@ export function Numbers() {
               marginRight: 'auto',
             }}
           >
-            Not hypothetical results. Real exits, real subscribers, real growth — delivered to 
-            some of the most competitive streaming markets in the world.
+            Not hypothetical results. Real brands scaled, real systems deployed, real growth 
+            delivered — across the most competitive markets in the world.
           </p>
         </div>
 
@@ -254,8 +253,8 @@ export function Numbers() {
               textAlign: 'center',
             }}
           >
-            <span style={{ color: '#ffffff', fontWeight: 600 }}>Two $100M+ exits</span>{' '}
-            — VP Marketing at Frndly TV (Roku acquisition) · Head of Digital at Layer3 TV (T-Mobile acquisition)
+            <span style={{ color: '#ffffff', fontWeight: 600 }}>Multiple successful exits</span>{' '}
+            — Growth strategy that doesn't just scale brands, it creates acquisition targets.
           </p>
         </div>
       </div>

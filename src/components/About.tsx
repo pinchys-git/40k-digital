@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 
 const credentials = [
-  { role: 'VP Marketing', company: 'Frndly TV', outcome: '$185M Roku acquisition' },
-  { role: 'Head of Digital', company: 'Layer3 TV', outcome: '$340M T-Mobile acquisition' },
-  { role: 'Chief Commercial Officer', company: '85SIXTY Agency', outcome: 'Performance marketing leadership' },
+  { role: 'Streaming & OTT', company: 'Growth Leadership', outcome: 'Scaled platforms to nearly 1M subscribers' },
+  { role: 'Telecom & Media', company: 'Digital Acquisition', outcome: 'Built systems that created acquisition targets' },
+  { role: 'Agency & Enterprise', company: 'Performance Marketing', outcome: 'Led strategy across 30+ brands' },
 ]
 
 export function About() {
@@ -101,9 +101,9 @@ export function About() {
                 marginBottom: '1.5rem',
               }}
             >
-              40K Digital was founded by a growth executive who's been in the room when the
-              acquisition term sheets land. Not as an advisor — as the person responsible
-              for the growth that made those acquisitions happen.
+              40K Digital was founded by operators who've been in the room when 
+              the big deals close. Not as advisors — as the people responsible for the 
+              growth that made those outcomes possible.
             </p>
             <p
               style={{
@@ -114,9 +114,9 @@ export function About() {
                 marginBottom: '2rem',
               }}
             >
-              That experience now powers a new kind of agency — one where the strategic 
-              instincts of a growth operator are amplified by AI systems built specifically
-              to execute at scale.
+              That experience now powers a new kind of agency — one where deep strategic 
+              instincts are amplified by AI systems we build and operate ourselves. 
+              Not off-the-shelf tools. Custom infrastructure.
             </p>
 
             {/* Founder name */}
@@ -251,8 +251,8 @@ export function About() {
               }}
             >
               {[
-                { val: '2', label: '$100M+ exits' },
-                { val: '20+', label: 'Years of expertise' },
+                { val: '30+', label: 'Brands scaled' },
+                { val: '20+', label: 'Years in the arena' },
               ].map((item) => (
                 <div key={item.label} style={{ textAlign: 'center' }}>
                   <div

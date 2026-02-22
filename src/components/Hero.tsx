@@ -210,9 +210,9 @@ export function Hero() {
           }}
         >
           {[
-            { label: '$525M+', sub: 'exits guided' },
-            { label: '20+', sub: 'years experience' },
-            { label: '~1M', sub: 'subscribers scaled' },
+            { label: '30+', sub: 'brands scaled' },
+            { label: '20+', sub: 'years deep' },
+            { label: '3', sub: 'AI products live' },
           ].map((stat) => (
             <div key={stat.label} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
               <span
