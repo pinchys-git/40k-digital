@@ -244,7 +244,7 @@ app.put('/api/admin/posts/:id', adminAuth, async (c) => {
     const values: any[] = []
 
     for (const [key, val] of Object.entries(body)) {
-      if (['title', 'slug', 'content', 'excerpt', 'category', 'tags', 'author', 'hero_image', 'status', 'published_at'].includes(key)) {
+      if (['title', 'slug', 'content', 'excerpt', 'category', 'tags', 'author', 'hero_image', 'og_image', 'status', 'published_at'].includes(key)) {
         fields.push(`${key} = ?`)
         if (key === 'tags' && typeof val !== 'string') {
           values.push(JSON.stringify(val))

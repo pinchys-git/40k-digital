@@ -9,6 +9,7 @@ interface Post {
   title: string
   excerpt: string | null
   hero_image: string | null
+  og_image: string | null
   slug: string
   category: string | null
   author: string | null
@@ -36,7 +37,7 @@ export async function onRequest(context: any) {
       const post: Post = await res.json()
       title = `${post.title} — 40K Digital`
       description = post.excerpt || description
-      image = post.hero_image || FALLBACK_IMAGE
+      image = post.og_image || post.hero_image || FALLBACK_IMAGE
     }
   } catch (_) {
     // Fall through to defaults
