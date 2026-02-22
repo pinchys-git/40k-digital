@@ -11,10 +11,12 @@ export function Navbar() {
   }, [])
 
   const links = [
-    { label: 'What We Do', href: '#services' },
-    { label: 'Results', href: '#numbers' },
-    { label: 'Process', href: '#process' },
-    { label: 'About', href: '#about' },
+    { label: 'What We Do', href: '/#services' },
+    { label: 'Results', href: '/#numbers' },
+    { label: 'Process', href: '/#process' },
+    { label: 'About', href: '/#about' },
+    { label: 'Blog', href: '/blog' },
+    { label: 'AI Readiness', href: '/fit-test' },
   ]
 
   return (
@@ -44,7 +46,7 @@ export function Navbar() {
       >
         {/* Logo */}
         <a
-          href="#"
+          href="/"
           style={{
             display: 'flex',
             alignItems: 'center',
