@@ -1,69 +1,66 @@
 import { useEffect, useRef } from 'react'
 
-interface Service {
-  icon: React.ReactNode
-  label: string
-  title: string
-  description: string
-  points: string[]
-}
-
-const services: Service[] = [
+const tiers = [
   {
+    label: '01 / Startups',
+    title: 'Startups & Founders',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
       </svg>
     ),
-    label: '01 / Growth',
-    title: 'Growth Strategy',
-    description: 'Performance marketing powered by AI. We combine deep media buying expertise with machine-learning attribution to find your most profitable growth channels.',
-    points: [
-      'Automated multi-channel acquisition',
-      'Intelligent media buying & optimization',
-      'AI-driven attribution modeling',
-      'Subscriber & retention growth',
+    description:
+      'You need to move fast and prove the model. We deploy lean AI systems that let a 3-person team punch like a 30-person agency — growth infrastructure built for speed over polish.',
+    highlights: [
+      'AI content engine from day one',
+      'Performance acquisition on lean budgets',
+      'Rapid iteration cycles',
+      'Founder-friendly reporting',
     ],
   },
   {
+    label: '02 / Growth Stage',
+    title: 'Growth Stage',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <rect x="2" y="3" width="7" height="7" rx="1"/>
-        <rect x="15" y="3" width="7" height="7" rx="1"/>
-        <rect x="2" y="14" width="7" height="7" rx="1"/>
-        <path d="M18.5 14v3M21 16.5h-5M15 7h4M19 3v4"/>
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+        <polyline points="17 6 23 6 23 12"/>
       </svg>
     ),
-    label: '02 / AI Systems',
-    title: 'Autonomous AI Systems',
-    description: 'Custom-built agents that research, create, verify, and publish content at scale. Multi-model orchestration that turns weeks of work into hours.',
-    points: [
-      'Autonomous content pipelines',
-      'Multi-model AI orchestration',
-      'Intelligent ad creative generation',
-      'Real-time performance agents',
+    description:
+      'You have traction. Now you need scale without losing efficiency. Our AI systems amplify what\'s already working, cut the channels that aren\'t, and build the infrastructure for the next order of magnitude.',
+    highlights: [
+      'Multi-channel AI orchestration',
+      'Attribution & LTV modelling',
+      'Autonomous campaign management',
+      'Team augmentation',
     ],
   },
   {
+    label: '03 / Enterprise',
+    title: 'Enterprise',
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <polyline points="16 18 22 12 16 6"/>
-        <polyline points="8 6 2 12 8 18"/>
+        <rect x="2" y="7" width="20" height="14" rx="2"/>
+        <path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/>
+        <line x1="12" y1="12" x2="12" y2="16"/>
+        <line x1="10" y1="14" x2="14" y2="14"/>
       </svg>
     ),
-    label: '03 / Engineering',
-    title: 'Product Engineering',
-    description: 'Full-stack products from concept to production — built on edge infrastructure and deployed in days, not months. Strategy and execution in one team.',
-    points: [
-      'Concept to production in days',
-      'Edge-first infrastructure',
-      'AI-native application architecture',
-      'Rapid iteration & deployment',
+    description:
+      'Complex org. Multiple brands. Legacy infrastructure. We build custom AI systems that integrate with what you have, unlock the data you\'re sitting on, and create measurable EBITDA lift at scale.',
+    highlights: [
+      'Custom AI infrastructure & integration',
+      'Cross-brand growth systems',
+      'Executive-level strategy',
+      'Enterprise SLA & compliance',
     ],
   },
 ]
 
-function ServiceCard({ service, index }: { service: Service; index: number }) {
+function TierCard({ tier, index }: { tier: typeof tiers[0]; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -80,7 +77,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           observer.disconnect()
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     )
 
     observer.observe(el)
@@ -102,13 +99,13 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         padding: '2.5rem',
         position: 'relative',
         overflow: 'hidden',
+        flex: '1 1 280px',
         cursor: 'default',
-        flex: '1 1 300px',
       }}
       onMouseEnter={(e) => {
         const el = e.currentTarget
         el.style.borderColor = 'rgba(0, 243, 255, 0.25)'
-        el.style.background = 'rgba(255, 255, 255, 0.045)'
+        el.style.background = 'rgba(0, 243, 255, 0.025)'
         el.style.boxShadow = '0 0 40px rgba(0, 243, 255, 0.06), 0 20px 60px rgba(0,0,0,0.3)'
         el.style.transform = 'translateY(-4px)'
       }}
@@ -120,7 +117,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
         el.style.transform = 'translateY(0)'
       }}
     >
-      {/* Subtle gradient corner glow */}
+      {/* Corner glow */}
       <div
         aria-hidden="true"
         style={{
@@ -150,12 +147,12 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           marginBottom: '1.75rem',
         }}
       >
-        {service.icon}
+        {tier.icon}
       </div>
 
       {/* Label */}
       <div className="section-label" style={{ marginBottom: '0.75rem', fontSize: '0.65rem' }}>
-        {service.label}
+        {tier.label}
       </div>
 
       {/* Title */}
@@ -170,25 +167,25 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
           lineHeight: 1.2,
         }}
       >
-        {service.title}
+        {tier.title}
       </h3>
 
       {/* Description */}
       <p
         style={{
           fontFamily: "'Plus Jakarta Sans', sans-serif",
-          fontSize: '0.95rem',
+          fontSize: '0.9rem',
           color: '#a1a1aa',
           lineHeight: 1.7,
           marginBottom: '1.75rem',
         }}
       >
-        {service.description}
+        {tier.description}
       </p>
 
-      {/* Points */}
+      {/* Highlights */}
       <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-        {service.points.map((point) => (
+        {tier.highlights.map((point) => (
           <li
             key={point}
             style={{
@@ -218,7 +215,7 @@ function ServiceCard({ service, index }: { service: Service; index: number }) {
   )
 }
 
-export function WhatWeDo() {
+export function Clients() {
   const headerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -242,11 +239,12 @@ export function WhatWeDo() {
 
   return (
     <section
-      id="services"
+      id="clients"
       className="tech-grid"
       style={{
         padding: 'clamp(5rem, 10vw, 8rem) clamp(1rem, 5vw, 4rem)',
         background: '#050505',
+        position: 'relative',
       }}
     >
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
@@ -258,10 +256,11 @@ export function WhatWeDo() {
             transform: 'translateY(30px)',
             transition: 'opacity 0.8s ease, transform 0.8s ease',
             marginBottom: 'clamp(3rem, 6vw, 5rem)',
+            textAlign: 'center',
           }}
         >
-          <div className="section-label" style={{ marginBottom: '1rem' }}>
-            / What We Do
+          <div className="section-label" style={{ marginBottom: '1rem', textAlign: 'center' }}>
+            / Who We Work With
           </div>
           <h2
             style={{
@@ -271,28 +270,29 @@ export function WhatWeDo() {
               letterSpacing: '-0.03em',
               color: '#ffffff',
               lineHeight: 1.05,
-              maxWidth: '600px',
             }}
           >
-            AI-Powered Services.{' '}
-            <span style={{ color: '#a1a1aa' }}>One Integrated Machine.</span>
+            AI-Powered Growth{' '}
+            <span style={{ color: '#00f3ff' }}>For Every Stage</span>
           </h2>
           <p
             style={{
               fontFamily: "'Plus Jakarta Sans', sans-serif",
               fontSize: '1rem',
               color: '#71717a',
-              maxWidth: '480px',
+              maxWidth: '520px',
               marginTop: '1.25rem',
               lineHeight: 1.7,
+              marginLeft: 'auto',
+              marginRight: 'auto',
             }}
           >
-            Most agencies pick one. We built the infrastructure to run all three simultaneously,
-            with AI coordinating across every layer.
+            From pre-revenue founders to Fortune 500 operators — we build the AI growth system
+            your stage actually needs, not a one-size-fits-all retainer.
           </p>
         </div>
 
-        {/* Cards */}
+        {/* Tier cards */}
         <div
           style={{
             display: 'flex',
@@ -300,8 +300,8 @@ export function WhatWeDo() {
             flexWrap: 'wrap',
           }}
         >
-          {services.map((service, i) => (
-            <ServiceCard key={service.title} service={service} index={i} />
+          {tiers.map((tier, i) => (
+            <TierCard key={tier.title} tier={tier} index={i} />
           ))}
         </div>
       </div>

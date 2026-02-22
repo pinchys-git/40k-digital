@@ -188,8 +188,8 @@ export function Numbers() {
               lineHeight: 1.05,
             }}
           >
-            Scale That Speaks{' '}
-            <span style={{ color: '#00f3ff' }}>For Itself</span>
+            AI-Driven Results{' '}
+            <span style={{ color: '#00f3ff' }}>That Speak For Themselves</span>
           </h2>
           <p
             style={{

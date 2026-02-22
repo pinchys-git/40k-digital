@@ -100,8 +100,8 @@ export function HowWeWork() {
               maxWidth: '600px',
             }}
           >
-            From First Call{' '}
-            <span style={{ color: '#a1a1aa' }}>to Full Velocity.</span>
+            Our AI-First Process.{' '}
+            <span style={{ color: '#a1a1aa' }}>From First Call to Full Velocity.</span>
           </h2>
           <p
             style={{
