@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { marked } from 'marked'
 
 interface Post {
   id: number
@@ -154,11 +155,15 @@ export function BlogPost() {
     })
   }, [post])
 
-  // Inject HTML content directly (posts are stored as HTML, not Markdown)
-  // Strip leading h1 — title is already shown in the hero
+  // Render content — detect HTML vs Markdown (older posts use Markdown)
+  // Strip leading h1 — title is shown in the hero
   useEffect(() => {
     if (!post || !contentRef.current) return
-    const html = post.content.replace(/^<h1[^>]*>.*?<\/h1>\s*/i, '')
+    const isHtml = post.content.trim().startsWith('<')
+    const raw = isHtml
+      ? post.content
+      : (marked.parse(post.content) as string)
+    const html = raw.replace(/^<h1[^>]*>.*?<\/h1>\s*/i, '')
     contentRef.current.innerHTML = html
   }, [post])
 
