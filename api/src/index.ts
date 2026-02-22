@@ -100,7 +100,7 @@ app.get('/api/posts', async (c) => {
 
     let query = `SELECT id, title, slug, excerpt, category, tags, author, hero_image, published_at
                  FROM posts
-                 WHERE status = 'published' AND published_at <= datetime('now')`
+                 WHERE status = 'published' AND replace(replace(published_at, 'T', ' '), 'Z', '') <= datetime('now')`
     const params: any[] = []
 
     if (category) {
@@ -217,7 +217,7 @@ app.post('/api/admin/posts/:id/publish', adminAuth, async (c) => {
   try {
     const id = c.req.param('id')
     const result = await c.env.DB.prepare(
-      `UPDATE posts SET status = 'published', updated_at = datetime('now')
+      `UPDATE posts SET status = 'published', published_at = datetime('now'), updated_at = datetime('now')
        WHERE id = ? AND status != 'published'`
     ).bind(id).run()
 
