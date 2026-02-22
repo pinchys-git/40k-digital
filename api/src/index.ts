@@ -283,6 +283,190 @@ app.get('/api/admin/posts', adminAuth, async (c) => {
   }
 })
 
+// ─── Admin: Research Items ─────────────────────────────────────────────────
+
+// Store a research item
+app.post('/api/admin/research/items', adminAuth, async (c) => {
+  try {
+    const body = await c.req.json()
+    const {
+      title, summary, source_url, source_name, category,
+      confidence = 'medium', fact_checked = 0, published_date,
+      scan_session, tags, relevance_score = 5, competitor_name,
+      action_recommended,
+    } = body
+
+    if (!title || !summary || !category) {
+      return c.json({ error: 'title, summary, and category are required' }, 400)
+    }
+
+    const result = await c.env.DB.prepare(
+      `INSERT INTO research_items
+        (title, summary, source_url, source_name, category, confidence, fact_checked,
+         published_date, scan_session, tags, relevance_score, competitor_name, action_recommended)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
+    ).bind(
+      title,
+      summary,
+      source_url || null,
+      source_name || null,
+      category,
+      confidence,
+      fact_checked,
+      published_date || null,
+      scan_session || null,
+      tags ? (typeof tags === 'string' ? tags : JSON.stringify(tags)) : null,
+      relevance_score,
+      competitor_name || null,
+      action_recommended || null,
+    ).run()
+
+    return c.json({ success: true, id: result.meta.last_row_id })
+  } catch (err: any) {
+    console.error('Research item create error:', err)
+    return c.json({ error: 'Failed to store research item' }, 500)
+  }
+})
+
+// Query research items
+app.get('/api/admin/research/items', adminAuth, async (c) => {
+  try {
+    const category = c.req.query('category')
+    const session = c.req.query('session')
+    const date = c.req.query('date')
+    const action = c.req.query('action')
+    const limit = Math.min(parseInt(c.req.query('limit') || '20'), 100)
+    const min_relevance = parseInt(c.req.query('min_relevance') || '1')
+
+    let query = `SELECT * FROM research_items WHERE relevance_score >= ?`
+    const params: any[] = [min_relevance]
+
+    if (category) { query += ` AND category = ?`; params.push(category) }
+    if (session) { query += ` AND scan_session = ?`; params.push(session) }
+    if (date) { query += ` AND scan_session LIKE ?`; params.push(`${date}%`) }
+    if (action) { query += ` AND action_recommended = ?`; params.push(action) }
+
+    query += ` ORDER BY captured_at DESC LIMIT ?`
+    params.push(limit)
+
+    const { results } = await c.env.DB.prepare(query).bind(...params).all()
+
+    const items = results.map((item: any) => ({
+      ...item,
+      tags: item.tags ? JSON.parse(item.tags) : [],
+    }))
+
+    return c.json({ items, count: items.length })
+  } catch (err: any) {
+    console.error('Research items list error:', err)
+    return c.json({ error: 'Failed to fetch research items' }, 500)
+  }
+})
+
+// ─── Admin: Research Briefs ────────────────────────────────────────────────
+
+// Store a research brief
+app.post('/api/admin/research/briefs', adminAuth, async (c) => {
+  try {
+    const body = await c.req.json()
+    const {
+      scan_date, session, executive_summary, item_count = 0,
+      top_signals, content_opportunities,
+    } = body
+
+    if (!scan_date || !session) {
+      return c.json({ error: 'scan_date and session are required' }, 400)
+    }
+
+    const result = await c.env.DB.prepare(
+      `INSERT INTO research_briefs
+        (scan_date, session, executive_summary, item_count, top_signals, content_opportunities)
+       VALUES (?, ?, ?, ?, ?, ?)`
+    ).bind(
+      scan_date,
+      session,
+      executive_summary || null,
+      item_count,
+      top_signals ? (typeof top_signals === 'string' ? top_signals : JSON.stringify(top_signals)) : null,
+      content_opportunities ? (typeof content_opportunities === 'string' ? content_opportunities : JSON.stringify(content_opportunities)) : null,
+    ).run()
+
+    return c.json({ success: true, id: result.meta.last_row_id })
+  } catch (err: any) {
+    console.error('Research brief create error:', err)
+    return c.json({ error: 'Failed to store research brief' }, 500)
+  }
+})
+
+// List research briefs
+app.get('/api/admin/research/briefs', adminAuth, async (c) => {
+  try {
+    const date = c.req.query('date')
+    const limit = Math.min(parseInt(c.req.query('limit') || '20'), 100)
+
+    let query = `SELECT * FROM research_briefs`
+    const params: any[] = []
+
+    if (date) { query += ` WHERE scan_date = ?`; params.push(date) }
+
+    query += ` ORDER BY created_at DESC LIMIT ?`
+    params.push(limit)
+
+    const { results } = await c.env.DB.prepare(query).bind(...params).all()
+
+    const briefs = results.map((brief: any) => ({
+      ...brief,
+      top_signals: brief.top_signals ? JSON.parse(brief.top_signals) : [],
+      content_opportunities: brief.content_opportunities ? JSON.parse(brief.content_opportunities) : [],
+    }))
+
+    return c.json({ briefs, count: briefs.length })
+  } catch (err: any) {
+    console.error('Research briefs list error:', err)
+    return c.json({ error: 'Failed to fetch research briefs' }, 500)
+  }
+})
+
+// Get single brief with its items
+app.get('/api/admin/research/briefs/:id', adminAuth, async (c) => {
+  try {
+    const id = c.req.param('id')
+
+    const brief = await c.env.DB.prepare(
+      `SELECT * FROM research_briefs WHERE id = ?`
+    ).bind(id).first()
+
+    if (!brief) {
+      return c.json({ error: 'Brief not found' }, 404)
+    }
+
+    // Build scan_session pattern: scan_date + '-' + session
+    const scanSession = `${(brief as any).scan_date}-${(brief as any).session}`
+
+    const { results: items } = await c.env.DB.prepare(
+      `SELECT * FROM research_items WHERE scan_session = ? ORDER BY relevance_score DESC, captured_at DESC`
+    ).bind(scanSession).all()
+
+    const parsedItems = items.map((item: any) => ({
+      ...item,
+      tags: item.tags ? JSON.parse(item.tags) : [],
+    }))
+
+    return c.json({
+      brief: {
+        ...(brief as any),
+        top_signals: (brief as any).top_signals ? JSON.parse((brief as any).top_signals as string) : [],
+        content_opportunities: (brief as any).content_opportunities ? JSON.parse((brief as any).content_opportunities as string) : [],
+      },
+      items: parsedItems,
+      item_count: parsedItems.length,
+    })
+  } catch (err: any) {
+    console.error('Research brief fetch error:', err)
+    return c.json({ error: 'Failed to fetch research brief' }, 500)
+  }
+})
+
 // ─── Fit Test ──────────────────────────────────────────────────────────────
 
 const GRADE_RECOMMENDATIONS: Record<string, string> = {
