@@ -17,6 +17,7 @@ app.use('*', cors({
       c.env.CORS_ORIGIN,
       'https://40kdigital.com',
       'https://www.40kdigital.com',
+      'https://40k-review.roccobot.workers.dev',
       'http://localhost:5173',
       'http://localhost:4173',
     ]
