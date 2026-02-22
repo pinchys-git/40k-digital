@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { marked } from 'marked'
 
 interface Post {
   id: number
@@ -155,10 +154,11 @@ export function BlogPost() {
     })
   }, [post])
 
-  // Render markdown HTML into the content div (strip leading h1  -  title is in hero)
+  // Inject HTML content directly (posts are stored as HTML, not Markdown)
+  // Strip leading h1 — title is already shown in the hero
   useEffect(() => {
     if (!post || !contentRef.current) return
-    const html = (marked.parse(post.content) as string).replace(/^<h1[^>]*>.*?<\/h1>\s*/i, '')
+    const html = post.content.replace(/^<h1[^>]*>.*?<\/h1>\s*/i, '')
     contentRef.current.innerHTML = html
   }, [post])
 
@@ -266,7 +266,19 @@ export function BlogPost() {
           overflow: 'hidden',
         }}
       >
-        {/* Gradient overlay for non-image hero */}
+        {/* Dark scrim — ensures text is always legible over hero image */}
+        {post.hero_image && (
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'rgba(0,0,0,0.52)',
+              pointerEvents: 'none',
+            }}
+          />
+        )}
+        {/* Category gradient accent (subtle, on top of scrim) */}
         <div
           aria-hidden="true"
           style={{
@@ -280,9 +292,9 @@ export function BlogPost() {
         <div
           aria-hidden="true"
           className="tech-grid"
-          style={{ position: 'absolute', inset: 0, opacity: 0.25, pointerEvents: 'none' }}
+          style={{ position: 'absolute', inset: 0, opacity: 0.15, pointerEvents: 'none' }}
         />
-        {/* Bottom fade */}
+        {/* Bottom fade — stronger, taller */}
         <div
           aria-hidden="true"
           style={{
@@ -290,7 +302,7 @@ export function BlogPost() {
             bottom: 0,
             left: 0,
             right: 0,
-            height: '120px',
+            height: '180px',
             background: 'linear-gradient(to bottom, transparent, #050505)',
             pointerEvents: 'none',
           }}
@@ -318,7 +330,7 @@ export function BlogPost() {
               gap: '0.5rem',
               fontFamily: "'JetBrains Mono', monospace",
               fontSize: '0.7rem',
-              color: '#3f3f46',
+              color: 'rgba(255,255,255,0.55)',
               textDecoration: 'none',
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
@@ -326,7 +338,7 @@ export function BlogPost() {
               transition: 'color 0.2s ease',
             }}
             onMouseEnter={(e) => ((e.currentTarget as HTMLElement).style.color = '#00f3ff')}
-            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = '#3f3f46')}
+            onMouseLeave={(e) => ((e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.55)')}
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7" />
@@ -363,6 +375,7 @@ export function BlogPost() {
               color: '#ffffff',
               lineHeight: 1.1,
               marginBottom: '1.5rem',
+              textShadow: '0 2px 20px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.9)',
             }}
           >
             {post.title}
@@ -373,30 +386,30 @@ export function BlogPost() {
             <span
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '0.7rem',
-                color: '#52525b',
+                fontSize: '0.75rem',
+                color: 'rgba(255,255,255,0.65)',
                 letterSpacing: '0.06em',
               }}
             >
               {formatDate(post.published_at)}
             </span>
-            <span style={{ color: '#3f3f46', fontSize: '0.65rem' }}>•</span>
+            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.65rem' }}>•</span>
             <span
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '0.7rem',
-                color: '#52525b',
+                fontSize: '0.75rem',
+                color: 'rgba(255,255,255,0.65)',
                 letterSpacing: '0.06em',
               }}
             >
               {estimateReadTime(post.content)}
             </span>
-            <span style={{ color: '#3f3f46', fontSize: '0.65rem' }}>•</span>
+            <span style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.65rem' }}>•</span>
             <span
               style={{
                 fontFamily: "'JetBrains Mono', monospace",
-                fontSize: '0.7rem',
-                color: '#52525b',
+                fontSize: '0.75rem',
+                color: 'rgba(255,255,255,0.65)',
                 letterSpacing: '0.06em',
               }}
             >
