@@ -6,7 +6,7 @@ const posts = [
     date: 'Feb 2025',
     title: 'Why Every Growth Team Needs an AI Agent Layer in 2025',
     excerpt:
-      'The brands winning right now aren\'t using AI as a tool — they\'re running it as infrastructure. Here\'s what a real autonomous growth stack looks like and why it compounds.',
+      'The brands winning right now aren\'t using AI as a tool  -  they\'re running it as infrastructure. Here\'s what a real autonomous growth stack looks like and why it compounds.',
     readTime: '6 min read',
   },
   {
@@ -14,7 +14,7 @@ const posts = [
     date: 'Jan 2025',
     title: 'Multi-Agent Orchestration: The Architecture Behind 10× Content Output',
     excerpt:
-      'We broke down how our content pipeline uses specialized agents in sequence — researcher, writer, editor, publisher — to produce at scale without sacrificing brand quality.',
+      'We broke down how our content pipeline uses specialized agents in sequence  -  researcher, writer, editor, publisher  -  to produce at scale without sacrificing brand quality.',
     readTime: '8 min read',
   },
   {
@@ -22,7 +22,7 @@ const posts = [
     date: 'Jan 2025',
     title: 'From $0 to Exit: The Growth Playbook Nobody Talks About',
     excerpt:
-      'After scaling multiple brands to acquisition, the pattern is clear. It\'s not about the channel — it\'s about building compounding systems early and letting AI accelerate the flywheel.',
+      'After scaling multiple brands to acquisition, the pattern is clear. It\'s not about the channel  -  it\'s about building compounding systems early and letting AI accelerate the flywheel.',
     readTime: '5 min read',
   },
 ]
@@ -289,7 +289,7 @@ export function BlogTeaser() {
                 lineHeight: 1.7,
               }}
             >
-              Thinking on AI, growth strategy, and the systems shaping modern marketing —
+              Thinking on AI, growth strategy, and the systems shaping modern marketing  - 
               from the people building them.
             </p>
           </div>

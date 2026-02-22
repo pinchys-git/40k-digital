@@ -10,7 +10,7 @@ const agents = [
     name: 'Content Agent',
     role: 'Always Writing',
     description:
-      'Researches, drafts, and publishes brand-consistent content 24/7. Blog posts, social copy, ad creative, email sequences — at 100× the speed of a human team.',
+      'Researches, drafts, and publishes brand-consistent content 24/7. Blog posts, social copy, ad creative, email sequences  -  at 100× the speed of a human team.',
     tags: ['Blog', 'Social', 'Email', 'Ad Copy'],
   },
   {
@@ -23,7 +23,7 @@ const agents = [
     name: 'Research Agent',
     role: 'Always Watching',
     description:
-      'Monitors competitors, tracks industry trends, and synthesises market intelligence into actionable briefs. Never misses a signal — never sleeps.',
+      'Monitors competitors, tracks industry trends, and synthesises market intelligence into actionable briefs. Never misses a signal  -  never sleeps.',
     tags: ['Market Intel', 'Competitors', 'Trends', 'Signals'],
   },
   {
@@ -48,7 +48,7 @@ const agents = [
     name: 'Campaign Agent',
     role: 'Always Optimizing',
     description:
-      'Manages paid campaigns in real-time — adjusting bids, rotating creatives, reallocating budgets. Your ROAS improves while you sleep.',
+      'Manages paid campaigns in real-time  -  adjusting bids, rotating creatives, reallocating budgets. Your ROAS improves while you sleep.',
     tags: ['Paid Ads', 'Bid Management', 'Creative Rotation'],
   },
 ]
@@ -318,7 +318,7 @@ export function AIEmployees() {
               lineHeight: 1.7,
             }}
           >
-            Every 40K engagement deploys a squad of specialized AI agents — each one purpose-built,
+            Every 40K engagement deploys a squad of specialized AI agents  -  each one purpose-built,
             always on, and working in concert. Your competitors are still hiring.
           </p>
         </div>
@@ -370,7 +370,7 @@ export function AIEmployees() {
                 color: '#71717a',
               }}
             >
-              Every agent is trained on your voice, data, and goals — not a generic template.
+              Every agent is trained on your voice, data, and goals  -  not a generic template.
             </p>
           </div>
           <a

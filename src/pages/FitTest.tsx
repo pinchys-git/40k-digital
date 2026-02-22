@@ -107,7 +107,7 @@ function getGrade(score: number): Grade {
   if (score >= 12) return {
     letter: 'B',
     headline: 'Strong foundation. AI could 3X your output.',
-    description: "You've built solid marketing operations, but there's significant headroom. The right AI stack would multiply your team's output without adding headcount — and close the gap on competitors who've already made the leap.",
+    description: "You've built solid marketing operations, but there's significant headroom. The right AI stack would multiply your team's output without adding headcount  -  and close the gap on competitors who've already made the leap.",
     color: '#a3e635',
     glow: '0 0 60px rgba(163,230,53,0.4), 0 0 120px rgba(163,230,53,0.15)',
   }
@@ -121,17 +121,17 @@ function getGrade(score: number): Grade {
   return {
     letter: 'D',
     headline: 'You needed this yesterday. Let\'s start.',
-    description: "Your competitors are pulling ahead fast. But the gap is closeable — and the companies that move now lock in advantages that compound for years. This is the moment. Let's rebuild your growth engine from the ground up.",
+    description: "Your competitors are pulling ahead fast. But the gap is closeable  -  and the companies that move now lock in advantages that compound for years. This is the moment. Let's rebuild your growth engine from the ground up.",
     color: '#f87171',
     glow: '0 0 60px rgba(248,113,113,0.4), 0 0 120px rgba(248,113,113,0.15)',
   }
 }
 
 const BOTTLENECK_RECS: Record<string, string> = {
-  'Content AI': 'Based on your bottleneck, we\'d start with our Content AI system — autonomous agents that research, write, and publish at scale while matching your brand voice perfectly.',
-  'Analytics AI': 'Based on your bottleneck, we\'d deploy our Analytics AI layer first — real-time dashboards, automated insights, and campaign signals that eliminate manual reporting entirely.',
-  'Campaign AI': 'Based on your bottleneck, we\'d lead with Campaign AI — automated launch workflows that compress weeks of execution into hours, with built-in optimization loops.',
-  'Full AI Suite': 'Given your across-the-board opportunity, we\'d architect a full AI growth stack — content, analytics, and campaign systems working in concert to transform your entire operation.',
+  'Content AI': 'Based on your bottleneck, we\'d start with our Content AI system  -  autonomous agents that research, write, and publish at scale while matching your brand voice perfectly.',
+  'Analytics AI': 'Based on your bottleneck, we\'d deploy our Analytics AI layer first  -  real-time dashboards, automated insights, and campaign signals that eliminate manual reporting entirely.',
+  'Campaign AI': 'Based on your bottleneck, we\'d lead with Campaign AI  -  automated launch workflows that compress weeks of execution into hours, with built-in optimization loops.',
+  'Full AI Suite': 'Given your across-the-board opportunity, we\'d architect a full AI growth stack  -  content, analytics, and campaign systems working in concert to transform your entire operation.',
 }
 
 /* ─── Confetti ────────────────────────────────────────────────────── */
@@ -355,7 +355,7 @@ export function FitTest() {
           }}
         />
 
-        {/* Progress bar — full */}
+        {/* Progress bar  -  full */}
         <div
           style={{
             position: 'fixed',
@@ -544,7 +544,7 @@ export function FitTest() {
                 color: '#00f3ff',
               }}
             >
-              ✓ Report request received — we'll be in touch shortly.
+              ✓ Report request received  -  we'll be in touch shortly.
             </div>
           )}
 

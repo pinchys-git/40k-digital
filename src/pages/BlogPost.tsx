@@ -155,7 +155,7 @@ export function BlogPost() {
     })
   }, [post])
 
-  // Render markdown HTML into the content div (strip leading h1 — title is in hero)
+  // Render markdown HTML into the content div (strip leading h1  -  title is in hero)
   useEffect(() => {
     if (!post || !contentRef.current) return
     const html = (marked.parse(post.content) as string).replace(/^<h1[^>]*>.*?<\/h1>\s*/i, '')

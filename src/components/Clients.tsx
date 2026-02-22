@@ -12,7 +12,7 @@ const tiers = [
       </svg>
     ),
     description:
-      'You need to move fast and prove the model. We deploy lean AI systems that let a 3-person team punch like a 30-person agency — growth infrastructure built for speed over polish.',
+      'You need to move fast and prove the model. We deploy lean AI systems that let a 3-person team punch like a 30-person agency  -  growth infrastructure built for speed over polish.',
     highlights: [
       'AI content engine from day one',
       'Performance acquisition on lean budgets',
@@ -287,7 +287,7 @@ export function Clients() {
               marginRight: 'auto',
             }}
           >
-            From pre-revenue founders to Fortune 500 operators — we build the AI growth system
+            From pre-revenue founders to Fortune 500 operators  -  we build the AI growth system
             your stage actually needs, not a one-size-fits-all retainer.
           </p>
         </div>

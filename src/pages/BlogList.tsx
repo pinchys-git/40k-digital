@@ -348,7 +348,7 @@ export function BlogList() {
               lineHeight: 1.7,
             }}
           >
-            Thinking on AI, growth strategy, and the systems shaping modern marketing —
+            Thinking on AI, growth strategy, and the systems shaping modern marketing  - 
             from the people building them.
           </p>
         </div>

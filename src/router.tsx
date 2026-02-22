@@ -1,5 +1,5 @@
 /**
- * router.tsx — React Router configuration for 40K Digital.
+ * router.tsx  -  React Router configuration for 40K Digital.
  *
  * Routes:
  *   /             → Homepage (all sections)

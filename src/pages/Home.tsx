@@ -1,5 +1,5 @@
 /**
- * Home.tsx — Route component for the "/" homepage.
+ * Home.tsx  -  Route component for the "/" homepage.
  *
  * This file imports and composes all homepage sections in order.
  * It is used when React Router is wired in (see ROUTER_INTEGRATION.md).

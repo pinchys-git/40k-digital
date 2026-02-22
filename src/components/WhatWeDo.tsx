@@ -53,7 +53,7 @@ const services: Service[] = [
     ),
     label: '03 / Engineering',
     title: 'Product Engineering',
-    description: 'Full-stack products from concept to production — built on edge infrastructure and deployed in days, not months. Strategy and execution in one team.',
+    description: 'Full-stack products from concept to production  -  built on edge infrastructure and deployed in days, not months. Strategy and execution in one team.',
     points: [
       'Concept to production in days',
       'Edge-first infrastructure',

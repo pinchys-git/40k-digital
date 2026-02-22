@@ -12,21 +12,21 @@ const phases = [
     step: '02',
     title: 'Build',
     description:
-      'We engineer the AI systems and growth infrastructure — autonomous agents, content pipelines, ad infrastructure, and measurement frameworks.',
+      'We engineer the AI systems and growth infrastructure  -  autonomous agents, content pipelines, ad infrastructure, and measurement frameworks.',
     details: ['Agent & pipeline development', 'Ad infrastructure buildout', 'Attribution & data architecture'],
   },
   {
     step: '03',
     title: 'Deploy',
     description:
-      'Everything ships to production-grade edge infrastructure. Fast. We don\'t hand you a prototype — we hand you a running machine.',
+      'Everything ships to production-grade edge infrastructure. Fast. We don\'t hand you a prototype  -  we hand you a running machine.',
     details: ['Edge infrastructure deployment', 'End-to-end QA & testing', 'Go-live & launch support'],
   },
   {
     step: '04',
     title: 'Optimize',
     description:
-      'AI systems don\'t sleep. Continuous monitoring, model updates, and performance optimization — keeping your growth engine tuned and accelerating.',
+      'AI systems don\'t sleep. Continuous monitoring, model updates, and performance optimization  -  keeping your growth engine tuned and accelerating.',
     details: ['Continuous performance monitoring', 'Model tuning & iteration', 'Scaling as you grow'],
   },
 ]

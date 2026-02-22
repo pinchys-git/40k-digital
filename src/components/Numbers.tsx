@@ -15,7 +15,7 @@ const stats: Stat[] = [
     value: 30,
     suffix: '+',
     label: 'Brands Scaled',
-    description: 'From startups to Fortune 500 — growth systems built across every vertical',
+    description: 'From startups to Fortune 500  -  growth systems built across every vertical',
   },
   {
     value: 20,
@@ -204,7 +204,7 @@ export function Numbers() {
             }}
           >
             Not hypothetical results. Real brands scaled, real systems deployed, real growth 
-            delivered — across the most competitive markets in the world.
+            delivered  -  across the most competitive markets in the world.
           </p>
         </div>
 
@@ -254,7 +254,7 @@ export function Numbers() {
             }}
           >
             <span style={{ color: '#ffffff', fontWeight: 600 }}>Multiple successful exits</span>{' '}
-            — Growth strategy that doesn't just scale brands, it creates acquisition targets.
+             -  Growth strategy that doesn't just scale brands, it creates acquisition targets.
           </p>
         </div>
       </div>

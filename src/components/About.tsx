@@ -72,7 +72,7 @@ export function About() {
             alignItems: 'center',
           }}
         >
-          {/* Left — text */}
+          {/* Left  -  text */}
           <div>
             <div className="section-label" style={{ marginBottom: '1rem' }}>
               / Leadership
@@ -102,7 +102,7 @@ export function About() {
               }}
             >
               40K Digital was founded by operators who've been in the room when 
-              the big deals close. Not as advisors — as the people responsible for the 
+              the big deals close. Not as advisors  -  as the people responsible for the 
               growth that made those outcomes possible.
             </p>
             <p
@@ -114,7 +114,7 @@ export function About() {
                 marginBottom: '2rem',
               }}
             >
-              That experience now powers a new kind of agency — one where deep strategic 
+              That experience now powers a new kind of agency  -  one where deep strategic 
               instincts are amplified by AI systems we build and operate ourselves. 
               Not off-the-shelf tools. Custom infrastructure.
             </p>
@@ -176,7 +176,7 @@ export function About() {
             </div>
           </div>
 
-          {/* Right — credential cards */}
+          {/* Right  -  credential cards */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {credentials.map((cred, i) => (
               <div

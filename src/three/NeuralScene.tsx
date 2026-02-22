@@ -124,7 +124,7 @@ function ParticleNetwork({ reduced }: { reduced: boolean }) {
   )
 }
 
-// Inner core — distorted sphere that pulses
+// Inner core  -  distorted sphere that pulses
 function CoreOrb({ reduced }: { reduced: boolean }) {
   const meshRef = useRef<THREE.Mesh>(null)
 
