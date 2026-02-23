@@ -19,6 +19,61 @@
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://40kdigital.com" />
     
+    <!-- Schema Markup: Organization + WebSite (global) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://40kdigital.com/#organization",
+          "name": "40K Digital",
+          "url": "https://40kdigital.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://40kdigital.com/favicon.svg",
+            "width": 512,
+            "height": 512
+          },
+          "description": "AI-native growth agency combining 20+ years of performance marketing expertise with custom-built autonomous AI systems to scale brands at speeds that weren't possible before.",
+          "foundingDate": "2024",
+          "areaServed": "Worldwide",
+          "knowsAbout": [
+            "AI Marketing",
+            "Performance Marketing",
+            "Autonomous AI Systems",
+            "Growth Strategy",
+            "Marketing Automation",
+            "AI Agents"
+          ],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "sales",
+            "url": "https://40kdigital.com/#contact",
+            "availableLanguage": "English"
+          },
+          "sameAs": []
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://40kdigital.com/#website",
+          "url": "https://40kdigital.com",
+          "name": "40K Digital",
+          "description": "AI-native growth agency. Where performance meets autonomous systems.",
+          "publisher": { "@id": "https://40kdigital.com/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://40kdigital.com/blog?search={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

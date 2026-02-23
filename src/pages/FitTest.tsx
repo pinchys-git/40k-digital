@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useJsonLd } from '../hooks/useJsonLd'
 
 /* ─── Question data ────────────────────────────────────────────────── */
 
@@ -219,6 +220,57 @@ export function FitTest() {
   const totalScore = answers.reduce((a, b) => a + b, 0)
   const grade = getGrade(totalScore)
   const progress = done ? 100 : (currentQ / QUESTIONS.length) * 100
+
+  const fitTestSchema = useMemo(() => [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebApplication',
+      '@id': 'https://40kdigital.com/fit-test/#app',
+      'name': 'AI Growth Readiness Assessment',
+      'alternateName': 'The 40K Fit Test',
+      'description': 'Discover your AI Growth Readiness score. A 6-question assessment that grades your business from A to F on AI adoption and growth potential.',
+      'url': 'https://40kdigital.com/fit-test',
+      'applicationCategory': 'BusinessApplication',
+      'operatingSystem': 'Any',
+      'offers': {
+        '@type': 'Offer',
+        'price': '0',
+        'priceCurrency': 'USD',
+      },
+      'provider': { '@id': 'https://40kdigital.com/#organization' },
+      'inLanguage': 'en-US',
+      'featureList': [
+        'AI adoption readiness scoring (A-F grade)',
+        'Marketing automation assessment',
+        'Custom growth recommendations',
+        'Personalized AI strategy report',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Quiz',
+      'name': 'AI Growth Readiness Assessment',
+      'description': 'A 6-question quiz to assess how ready your business is for AI-powered marketing and autonomous growth systems.',
+      'url': 'https://40kdigital.com/fit-test',
+      'author': { '@id': 'https://40kdigital.com/#organization' },
+      'educationalLevel': 'beginner',
+      'about': [
+        { '@type': 'Thing', 'name': 'AI Marketing' },
+        { '@type': 'Thing', 'name': 'Marketing Automation' },
+        { '@type': 'Thing', 'name': 'Growth Strategy' },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://40kdigital.com' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'AI Growth Readiness Assessment', 'item': 'https://40kdigital.com/fit-test' },
+      ],
+    },
+  ], [])
+
+  useJsonLd(fitTestSchema)
 
   function selectOption(optIdx: number) {
     if (selectedIdx !== null || transitioning) return

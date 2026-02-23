@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { marked } from 'marked'
+import { useJsonLd } from '../hooks/useJsonLd'
 
 interface Post {
   id: number
@@ -193,6 +194,67 @@ export function BlogPost() {
   const gradient = post
     ? (CATEGORY_GRADIENTS[post.category] ?? CATEGORY_GRADIENTS.default)
     : CATEGORY_GRADIENTS.default
+
+  const postSchema = useMemo(() => {
+    if (!post) return []
+    const url = `https://40kdigital.com/blog/${post.slug}`
+    return [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        '@id': `${url}/#article`,
+        'headline': post.title,
+        'description': post.excerpt,
+        'url': url,
+        'datePublished': post.published_at,
+        'dateModified': post.published_at,
+        'image': post.hero_image
+          ? {
+              '@type': 'ImageObject',
+              'url': post.hero_image,
+              'width': 1200,
+              'height': 630,
+            }
+          : undefined,
+        'author': {
+          '@type': 'Organization',
+          '@id': 'https://40kdigital.com/#organization',
+          'name': '40K Digital',
+          'url': 'https://40kdigital.com',
+        },
+        'publisher': {
+          '@type': 'Organization',
+          '@id': 'https://40kdigital.com/#organization',
+          'name': '40K Digital',
+          'logo': {
+            '@type': 'ImageObject',
+            'url': 'https://40kdigital.com/favicon.svg',
+          },
+        },
+        'mainEntityOfPage': {
+          '@type': 'WebPage',
+          '@id': url,
+        },
+        'articleSection': post.category,
+        'keywords': Array.isArray(post.tags)
+          ? post.tags.join(', ')
+          : post.tags,
+        'inLanguage': 'en-US',
+        'isPartOf': { '@id': 'https://40kdigital.com/blog/#blog' },
+      },
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://40kdigital.com' },
+          { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': 'https://40kdigital.com/blog' },
+          { '@type': 'ListItem', 'position': 3, 'name': post.title, 'item': url },
+        ],
+      },
+    ]
+  }, [post])
+
+  useJsonLd(postSchema)
 
   if (loading) {
     return (

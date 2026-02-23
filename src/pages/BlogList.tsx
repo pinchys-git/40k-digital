@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useJsonLd } from '../hooks/useJsonLd'
 
 interface Post {
   id: number
@@ -232,6 +233,38 @@ export function BlogList() {
         setLoading(false)
       })
   }, [])
+
+  const blogSchema = useMemo(() => [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      '@id': 'https://40kdigital.com/blog/#blog',
+      'name': 'AI Insights & Perspectives — 40K Digital',
+      'description': 'Thinking on AI, growth strategy, and the systems shaping modern marketing from the people building them.',
+      'url': 'https://40kdigital.com/blog',
+      'publisher': { '@id': 'https://40kdigital.com/#organization' },
+      'inLanguage': 'en-US',
+      'blogPost': posts.slice(0, 10).map((p) => ({
+        '@type': 'BlogPosting',
+        'headline': p.title,
+        'description': p.excerpt,
+        'url': `https://40kdigital.com/blog/${p.slug}`,
+        'datePublished': p.published_at,
+        'image': p.hero_image ?? undefined,
+        'author': { '@type': 'Organization', 'name': '40K Digital' },
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      'itemListElement': [
+        { '@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': 'https://40kdigital.com' },
+        { '@type': 'ListItem', 'position': 2, 'name': 'Blog', 'item': 'https://40kdigital.com/blog' },
+      ],
+    },
+  ], [posts])
+
+  useJsonLd(blogSchema)
 
   function loadMore() {
     setLoadingMore(true)
