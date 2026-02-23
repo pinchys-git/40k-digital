@@ -338,6 +338,45 @@ export function FitTest() {
           overflow: 'hidden',
         }}
       >
+        {/* Minimal top bar — logo links home, always a way out */}
+        <div
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            zIndex: 100,
+            padding: '1rem 2rem',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            background: 'rgba(5,5,5,0.85)',
+            backdropFilter: 'blur(16px)',
+            borderBottom: '1px solid rgba(255,255,255,0.05)',
+          }}
+        >
+          <a href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.1rem', fontWeight: 800, color: '#00f3ff', textShadow: '0 0 16px rgba(0,243,255,0.5)' }}>40K</span>
+            <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.1rem', fontWeight: 500, color: '#ffffff', letterSpacing: '0.05em' }}>DIGITAL</span>
+          </a>
+          <a
+            href="/"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.35)',
+              textDecoration: 'none',
+              letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+              transition: 'color 0.2s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+          >
+            ← Back to site
+          </a>
+        </div>
+
         {showConfetti && <Confetti />}
 
         {/* Ambient glow */}

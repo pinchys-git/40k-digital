@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { pathname } = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -88,26 +90,31 @@ export function Navbar() {
           }}
           className="nav-desktop"
         >
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              style={{
-                fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: '0.875rem',
-                color: '#a1a1aa',
-                textDecoration: 'none',
-                transition: 'color 0.2s ease',
-                letterSpacing: '0.02em',
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = '#a1a1aa')}
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) => {
+            const isActive = link.href.startsWith('/') && !link.href.startsWith('/#') && pathname === link.href
+            return (
+              <a
+                key={link.href}
+                href={link.href}
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '0.875rem',
+                  color: isActive ? '#00f3ff' : '#a1a1aa',
+                  textDecoration: 'none',
+                  transition: 'color 0.2s ease',
+                  letterSpacing: '0.02em',
+                  borderBottom: isActive ? '1px solid rgba(0,243,255,0.5)' : '1px solid transparent',
+                  paddingBottom: '2px',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#ffffff')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = isActive ? '#00f3ff' : '#a1a1aa')}
+              >
+                {link.label}
+              </a>
+            )
+          })}
           <a
-            href="#contact"
+            href="/#contact"
             className="btn-primary"
             style={{
               padding: '0.6rem 1.5rem',
@@ -176,7 +183,7 @@ export function Navbar() {
             </a>
           ))}
           <a
-            href="#contact"
+            href="/#contact"
             onClick={() => setMenuOpen(false)}
             className="btn-primary"
             style={{ textDecoration: 'none', textAlign: 'center', marginTop: '0.5rem' }}
