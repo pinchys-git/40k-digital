@@ -20,7 +20,7 @@
   --font-body: 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --text-hero: clamp(3.5rem, 11vw, 10.5rem);
+  --text-hero: clamp(2rem, 5.5vw, 5.5rem);
   --text-h1: clamp(2rem, 5vw, 4rem);
   --text-h2: clamp(1.5rem, 3vw, 2.5rem);
   --text-body: clamp(1rem, 1.5vw, 1.125rem);
