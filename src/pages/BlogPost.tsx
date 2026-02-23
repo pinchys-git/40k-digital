@@ -15,6 +15,29 @@ interface Post {
   published_at: string
 }
 
+const CATEGORY_CTA: Record<string, { headline: string; sub: string }> = {
+  'AI Strategy': {
+    headline: 'Ready to Build Your AI Growth Stack?',
+    sub: "Most brands talk about AI. We build the systems that actually run it. Let's talk about what's possible for yours.",
+  },
+  'Growth Strategy': {
+    headline: 'Ready to Scale Revenue with AI?',
+    sub: "Growth without infrastructure is just noise. Let's build the engine behind your next phase.",
+  },
+  'Autonomous Agents': {
+    headline: 'Ready to Deploy Your Own AI Agents?',
+    sub: "Autonomous systems aren't the future — they're how we operate now. Let's build yours.",
+  },
+  'Performance Marketing': {
+    headline: 'Ready to Outperform Your Benchmarks?',
+    sub: "Data-driven marketing at scale, powered by AI. Let's look at your numbers together.",
+  },
+  default: {
+    headline: 'Ready to Build Something That Actually Works?',
+    sub: "No decks. No fluff. Just a real conversation about how AI can transform your marketing operations.",
+  },
+}
+
 const CATEGORY_GRADIENTS: Record<string, string> = {
   'AI Strategy': 'linear-gradient(135deg, rgba(0,243,255,0.12) 0%, rgba(0,80,120,0.25) 60%, rgba(5,5,5,0) 100%)',
   'Growth Strategy': 'linear-gradient(135deg, rgba(100,0,255,0.12) 0%, rgba(40,0,150,0.2) 60%, rgba(5,5,5,0) 100%)',
@@ -468,44 +491,64 @@ export function BlogPost() {
         )}
 
         {/* CTA */}
-        <div
-          style={{
-            marginTop: '4rem',
-            padding: '2.5rem',
-            background: 'rgba(0,243,255,0.04)',
-            border: '1px solid rgba(0,243,255,0.15)',
-            borderRadius: '20px',
-            textAlign: 'center',
-          }}
-        >
-          <div className="section-label" style={{ marginBottom: '0.75rem' }}>/ Work With Us</div>
-          <h3
-            style={{
-              fontFamily: "'Space Grotesk', sans-serif",
-              fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
-              fontWeight: 700,
-              color: '#ffffff',
-              letterSpacing: '-0.02em',
-              marginBottom: '0.75rem',
-            }}
-          >
-            Ready to Build Your AI Growth Stack?
-          </h3>
-          <p
-            style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: '0.95rem',
-              color: '#71717a',
-              marginBottom: '1.75rem',
-              lineHeight: 1.6,
-            }}
-          >
-            Let's talk about how AI can transform your marketing operations.
-          </p>
-          <a href="/#contact" className="btn-primary" style={{ textDecoration: 'none' }}>
-            Let's Talk →
-          </a>
-        </div>
+        {(() => {
+          const cta = post
+            ? (CATEGORY_CTA[post.category] ?? CATEGORY_CTA.default)
+            : CATEGORY_CTA.default
+          return (
+            <div
+              style={{
+                marginTop: '4rem',
+                padding: '2.5rem',
+                background: 'rgba(0,243,255,0.04)',
+                border: '1px solid rgba(0,243,255,0.15)',
+                borderRadius: '20px',
+                textAlign: 'center',
+              }}
+            >
+              <div className="section-label" style={{ marginBottom: '0.75rem' }}>/ Work With Us</div>
+              <h3
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: 'clamp(1.25rem, 3vw, 1.75rem)',
+                  fontWeight: 700,
+                  color: '#ffffff',
+                  letterSpacing: '-0.02em',
+                  marginBottom: '0.75rem',
+                }}
+              >
+                {cta.headline}
+              </h3>
+              <p
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: '0.95rem',
+                  color: '#71717a',
+                  marginBottom: '1.75rem',
+                  lineHeight: 1.6,
+                  maxWidth: '480px',
+                  margin: '0 auto 1.75rem',
+                }}
+              >
+                {cta.sub}
+              </p>
+              <a
+                href="/#contact"
+                className="btn-primary"
+                style={{ textDecoration: 'none' }}
+                onClick={(e) => {
+                  // If already on homepage, smooth-scroll instead of reloading
+                  if (window.location.pathname === '/') {
+                    e.preventDefault()
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }}
+              >
+                Let's Talk →
+              </a>
+            </div>
+          )
+        })()}
 
         {/* Related posts */}
         {related.length > 0 && (

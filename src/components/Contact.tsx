@@ -6,10 +6,18 @@ export function Contact() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const el = contentRef.current
     if (!el) return
+
+    // If navigating directly to #contact (e.g. from blog CTA), show immediately
+    if (window.location.hash === '#contact') {
+      el.style.opacity = '1'
+      el.style.transform = 'translateY(0)'
+      return
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -26,14 +34,37 @@ export function Contact() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setSubmitting(true)
-    // Simulate submit
-    setTimeout(() => {
-      setSubmitting(false)
+    setError(null)
+
+    try {
+      const res = await fetch('https://40k-digital-api.roccobot.workers.dev/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+          source: 'contact_form',
+        }),
+      })
+
+      const data = await res.json() as { error?: string }
+
+      if (!res.ok) {
+        setError(data.error || 'Something went wrong. Please try again.')
+        setSubmitting(false)
+        return
+      }
+
       setSubmitted(true)
-    }, 1200)
+      setSubmitting(false)
+    } catch {
+      setError('Network error. Please check your connection and try again.')
+      setSubmitting(false)
+    }
   }
 
   const inputStyle: React.CSSProperties = {
@@ -278,6 +309,23 @@ export function Contact() {
                   }}
                 />
               </div>
+
+              {error && (
+                <div
+                  style={{
+                    marginBottom: '1rem',
+                    padding: '0.75rem 1rem',
+                    background: 'rgba(255,60,60,0.08)',
+                    border: '1px solid rgba(255,60,60,0.25)',
+                    borderRadius: '10px',
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: '0.85rem',
+                    color: '#ff6b6b',
+                  }}
+                >
+                  {error}
+                </div>
+              )}
 
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                 <div
