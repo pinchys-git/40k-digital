@@ -10,7 +10,7 @@
  * See ROUTER_INTEGRATION.md for full wiring instructions.
  */
 
-import { createBrowserRouter, Outlet } from 'react-router-dom'
+import { createBrowserRouter, Outlet, ScrollRestoration } from 'react-router-dom'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { Home } from './pages/Home'
@@ -22,6 +22,7 @@ import { FitTest } from './pages/FitTest'
 function RootLayout() {
   return (
     <>
+      <ScrollRestoration />
       <Navbar />
       <Outlet />
       <Footer />
@@ -31,7 +32,12 @@ function RootLayout() {
 
 /** Fit Test has no nav/footer for immersive focus */
 function MinimalLayout() {
-  return <Outlet />
+  return (
+    <>
+      <ScrollRestoration />
+      <Outlet />
+    </>
+  )
 }
 
 export const router = createBrowserRouter([
