@@ -205,18 +205,26 @@ function PostCard({ post, index }: { post: Post; index: number }) {
   )
 }
 
+const PAGE_SIZE = 12
+
 export function BlogList() {
   const [posts, setPosts] = useState<Post[]>([])
   const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
+  const [hasMore, setHasMore] = useState(false)
+  const [offset, setOffset] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [activeCategory, setActiveCategory] = useState<string>('All')
   const headerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    fetch('https://40k-digital-api.roccobot.workers.dev/api/posts')
+    fetch(`https://40k-digital-api.roccobot.workers.dev/api/posts?limit=${PAGE_SIZE}&offset=0`)
       .then((r) => r.json())
       .then((data) => {
-        setPosts(data.posts ?? [])
+        const fetched = data.posts ?? []
+        setPosts(fetched)
+        setHasMore(fetched.length === PAGE_SIZE)
+        setOffset(fetched.length)
         setLoading(false)
       })
       .catch(() => {
@@ -224,6 +232,20 @@ export function BlogList() {
         setLoading(false)
       })
   }, [])
+
+  function loadMore() {
+    setLoadingMore(true)
+    fetch(`https://40k-digital-api.roccobot.workers.dev/api/posts?limit=${PAGE_SIZE}&offset=${offset}`)
+      .then((r) => r.json())
+      .then((data) => {
+        const fetched = data.posts ?? []
+        setPosts((prev) => [...prev, ...fetched])
+        setHasMore(fetched.length === PAGE_SIZE)
+        setOffset((prev) => prev + fetched.length)
+        setLoadingMore(false)
+      })
+      .catch(() => setLoadingMore(false))
+  }
 
   useEffect(() => {
     const el = headerRef.current
@@ -476,6 +498,69 @@ export function BlogList() {
             }}
           >
             No posts found in this category.
+          </div>
+        )}
+
+        {/* Load More */}
+        {!loading && !error && hasMore && activeCategory === 'All' && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '3rem' }}>
+            <button
+              onClick={loadMore}
+              disabled={loadingMore}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.6rem',
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: '0.75rem',
+                letterSpacing: '0.1em',
+                textTransform: 'uppercase',
+                padding: '0.85rem 2rem',
+                background: 'rgba(0,243,255,0.06)',
+                border: '1px solid rgba(0,243,255,0.2)',
+                borderRadius: '8px',
+                color: loadingMore ? '#3f3f46' : '#00f3ff',
+                cursor: loadingMore ? 'not-allowed' : 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                if (!loadingMore) {
+                  const el = e.currentTarget
+                  el.style.background = 'rgba(0,243,255,0.12)'
+                  el.style.borderColor = 'rgba(0,243,255,0.4)'
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!loadingMore) {
+                  const el = e.currentTarget
+                  el.style.background = 'rgba(0,243,255,0.06)'
+                  el.style.borderColor = 'rgba(0,243,255,0.2)'
+                }
+              }}
+            >
+              {loadingMore ? (
+                <>
+                  <div
+                    style={{
+                      width: '12px',
+                      height: '12px',
+                      border: '1.5px solid rgba(0,243,255,0.2)',
+                      borderTopColor: '#00f3ff',
+                      borderRadius: '50%',
+                      animation: 'spin 0.8s linear infinite',
+                    }}
+                  />
+                  Loading...
+                </>
+              ) : (
+                <>
+                  Load More Posts
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 5v14M5 12l7 7 7-7" />
+                  </svg>
+                </>
+              )}
+            </button>
           </div>
         )}
       </div>
