@@ -210,12 +210,11 @@ export function Hero() {
           }}
         >
           {[
-            { label: '30+', sub: 'brands scaled', detail: null },
-            { label: '20+', sub: 'years deep', detail: null },
-            { label: "100's", sub: 'Live Agents', detail: null },
-            { label: '3', sub: 'AI Products Shipped', detail: 'Custom-built autonomous systems running in production today' },
+            { label: '30+', sub: 'brands scaled' },
+            { label: '20+', sub: 'years deep' },
+            { label: "100's", sub: 'Live Agents' },
           ].map((stat) => (
-            <div key={stat.label} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem', maxWidth: stat.detail ? '200px' : undefined }}>
+            <div key={stat.label} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
               <span
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
@@ -238,19 +237,6 @@ export function Hero() {
               >
                 {stat.sub}
               </span>
-              {stat.detail && (
-                <span
-                  style={{
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                    fontSize: '0.7rem',
-                    color: '#52525b',
-                    lineHeight: 1.4,
-                    marginTop: '0.1rem',
-                  }}
-                >
-                  {stat.detail}
-                </span>
-              )}
             </div>
           ))}
         </div>

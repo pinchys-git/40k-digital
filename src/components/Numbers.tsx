@@ -30,10 +30,10 @@ const stats: Stat[] = [
     description: 'Average account revenue growth delivered through data-driven strategy',
   },
   {
-    value: 3,
-    suffix: '',
-    label: 'AI Products Shipped',
-    description: 'Custom-built autonomous systems running in production today',
+    value: 100,
+    suffix: "'s",
+    label: 'Live Agents',
+    description: 'Autonomous AI agents running in production across client accounts today',
   },
 ]
 
