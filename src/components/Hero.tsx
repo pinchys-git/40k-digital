@@ -135,7 +135,6 @@ export function Hero() {
           className="headline-display"
           style={{
             color: '#ffffff',
-            maxWidth: '900px',
             marginBottom: '1rem',
             lineHeight: 0.9,
           }}
@@ -212,7 +211,7 @@ export function Hero() {
           {[
             { label: '30+', sub: 'brands scaled' },
             { label: '20+', sub: 'years deep' },
-            { label: '3', sub: 'AI products live' },
+            { label: "100's", sub: 'Live Agents' },
           ].map((stat) => (
             <div key={stat.label} style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
               <span
