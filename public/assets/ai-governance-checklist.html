@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Governance Checklist for Marketing Teams | 40K Digital</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --accent: #00f3ff;
+            --accent-glow: rgba(0, 243, 255, 0.2);
+            --border: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --font-main: system-ui, -apple-system, sans-serif;
+            --font-mono: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.5rem;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 10px;
+            letter-spacing: -0.03em;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        section {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .checklist-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .checklist-item:last-child {
+            margin-bottom: 0;
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--text-secondary);
+            border-radius: 3px;
+            margin-right: 15px;
+            margin-top: 4px;
+            cursor: pointer;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '✓';
+            color: #000;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        label {
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        input[type="checkbox"]:checked + label {
+            color: var(--text-primary);
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .meta-info {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+            .container {
+                max-width: 100%;
+            }
+            section {
+                background: none;
+                border: 1px solid #ccc;
+                page-break-inside: avoid;
+            }
+            h2 {
+                color: #000;
+            }
+            h2::before {
+                background: #000;
+                box-shadow: none;
+            }
+            input[type="checkbox"] {
+                border-color: #000;
+            }
+            input[type="checkbox"]:checked {
+                background-color: #000;
+            }
+            input[type="checkbox"]:checked::after {
+                color: #fff;
+            }
+            .subtitle, label {
+                color: #333;
+            }
+            a {
+                color: #000;
+                text-decoration: underline;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div>
+            <h1>AI Governance Checklist</h1>
+            <div class="subtitle">Operational Guardrails for Marketing Teams</div>
+        </div>
+        <a href="https://40kdigital.com" class="logo">40K <span>DIGITAL</span></a>
+    </header>
+
+    <p style="margin-bottom: 40px; color: var(--text-secondary); font-size: 1.1rem;">
+        Security and governance shouldn't block innovation. Use this checklist to safely deploy AI tools in your marketing stack without waiting for a 6-month compliance review.
+    </p>
+
+    <!-- SECTION 1: DATA CLASSIFICATION -->
+    <section>
+        <h2>1. Data Classification</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="dc1">
+            <label for="dc1"><strong>Public Data:</strong> Approved for all AI models (e.g., published blog posts, website copy, press releases).</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="dc2">
+            <label for="dc2"><strong>Internal Non-Sensitive:</strong> Approved for enterprise AI instances only (e.g., style guides, internal memos, process docs).</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="dc3">
+            <label for="dc3"><strong>Confidential/PII:</strong> PROHIBITED for public AI models. Requires self-hosted or zero-retention agreement (e.g., customer lists, pricing strategy, unreleased product specs).</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="dc4">
+            <label for="dc4">Team has been trained on data levels and knows which tools accept which data types.</label>
+        </div>
+    </section>
+
+    <!-- SECTION 2: VENDOR ASSESSMENT -->
+    <section>
+        <h2>2. Vendor Assessment (Pre-Deployment)</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="va1">
+            <label for="va1"><strong>Data Residency:</strong> Does the vendor process/store data in compliant regions (e.g., EU/US)?</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="va2">
+            <label for="va2"><strong>Training Opt-Out:</strong> Have we explicitly opted out of our data being used to train their foundation models?</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="va3">
+            <label for="va3"><strong>Retention Policy:</strong> Does the vendor delete input/output data after processing? (Zero-retention is preferred for sensitive tasks).</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="va4">
+            <label for="va4"><strong>Indemnification:</strong> Does the vendor offer IP indemnification for generated outputs?</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="va5">
+            <label for="va5"><strong>SOC2 / ISO 27001:</strong> Valid security certification is on file.</label>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ACCESS & APPROVALS -->
+    <section>
+        <h2>3. Access & Workflow</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="aa1">
+            <label for="aa1"><strong>Role-Based Access:</strong> AI tool seats are assigned only to trained team members, not shared generic logins.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="aa2">
+            <label for="aa2"><strong>Shadow AI Audit:</strong> We have scanned for unauthorized AI browser extensions and blocked them.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="aa3">
+            <label for="aa3"><strong>Approval Chain:</strong> All AI-generated assets must be reviewed by a human senior editor before publishing.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="aa4">
+            <label for="aa4"><strong>Disclosure:</strong> We have a policy on when to disclose "AI-generated" to our audience (e.g., images vs. text).</label>
+        </div>
+    </section>
+
+    <!-- SECTION 4: BRAND SAFETY & QUALITY -->
+    <section>
+        <h2>4. Brand Safety Guardrails</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="bs1">
+            <label for="bs1"><strong>Tone Check:</strong> AI outputs are run through a specific brand voice prompt/filter before use.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="bs2">
+            <label for="bs2"><strong>Fact-Checking:</strong> All statistics, quotes, and claims in AI copy are manually verified against primary sources.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="bs3">
+            <label for="bs3"><strong>Bias Review:</strong> Visuals and copy are reviewed for representation bias and stereotypes.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="bs4">
+            <label for="bs4"><strong>Copyright Check:</strong> We do not use AI to generate "in the style of [living artist/competitor]" to avoid infringement risks.</label>
+        </div>
+    </section>
+
+    <!-- SECTION 5: INCIDENT RESPONSE -->
+    <section>
+        <h2>5. Incident Response Playbook</h2>
+        <div class="checklist-item">
+            <input type="checkbox" id="ir1">
+            <label for="ir1"><strong>Kill Switch:</strong> We know how to immediately take down automated content feeds if they go rogue.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="ir2">
+            <label for="ir2"><strong>Correction Protocol:</strong> We have a template for retracting/correcting AI errors publicly if needed.</label>
+        </div>
+        <div class="checklist-item">
+            <input type="checkbox" id="ir3">
+            <label for="ir3"><strong>Feedback Loop:</strong> Errors are logged to improve future prompts and system instructions.</label>
+        </div>
+    </section>
+
+    <footer>
+        <p>Built by <strong>40K Digital</strong> — AI-Native Growth Agency</p>
+        <p><a href="https://40kdigital.com/fit-test">Take the AI Growth Readiness Test</a></p>
+    </footer>
+</div>
+
+</body>
+</html>

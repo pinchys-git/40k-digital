@@ -40,6 +40,8 @@ function MinimalLayout() {
   )
 }
 
+import { GovernanceChecklist } from './pages/GovernanceChecklist'
+
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
@@ -47,6 +49,7 @@ export const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/blog', element: <BlogList /> },
       { path: '/blog/:slug', element: <BlogPost /> },
+      { path: '/ai-governance-checklist', element: <GovernanceChecklist /> },
     ],
   },
   {
