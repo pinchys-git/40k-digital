@@ -46,8 +46,8 @@ const CATEGORY_GRADIENTS: Record<string, string> = {
   default: 'linear-gradient(135deg, rgba(50,50,50,0.2) 0%, rgba(5,5,5,0) 100%)',
 }
 
-function estimateReadTime(content: string): string {
-  const wordCount = content.split(/\s+/).length
+function estimateReadTime(content: string | null | undefined): string {
+  const wordCount = (content ?? '').split(/\s+/).length
   const minutes = Math.max(3, Math.round(wordCount / 200))
   return `${minutes} min read`
 }
@@ -123,7 +123,7 @@ function RelatedCard({ post }: { post: Post }) {
             lineHeight: 1.6,
           }}
         >
-          {post.excerpt.slice(0, 100)}…
+          {(post.excerpt ?? '').slice(0, 100)}…
         </p>
       </div>
     </Link>

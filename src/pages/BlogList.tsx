@@ -22,8 +22,9 @@ const CATEGORY_GRADIENTS: Record<string, string> = {
 }
 
 function estimateReadTime(post: Post): string {
-  // Rough estimate from excerpt length
-  return `${Math.max(3, Math.round(post.excerpt.split(' ').length / 30 * 5))} min read`
+  // Rough estimate from excerpt length — guard against null excerpt
+  const words = (post.excerpt ?? '').split(' ').length
+  return `${Math.max(3, Math.round(words / 30 * 5))} min read`
 }
 
 function formatDate(iso: string): string {
