@@ -150,6 +150,12 @@ app.get('/api/posts/:slug', async (c) => {
 
 // ─── Admin: Create/Update Posts (for Content Pipeline) ─────────────────────
 
+// Strip em dashes from content strings (replace with ' - ')
+const stripEmDashes = (text: string | null | undefined): string | null | undefined => {
+  if (!text) return text
+  return text.replace(/—/g, ' - ').replace(/  +/g, ' ')
+}
+
 // Auth middleware for admin routes
 const adminAuth = async (c: any, next: any) => {
   const authHeader = c.req.header('Authorization')
@@ -180,14 +186,19 @@ app.post('/api/admin/posts', adminAuth, async (c) => {
     // Generate slug if not provided
     const finalSlug = slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 
+    // Strip em dashes from all text fields
+    const cleanTitle = stripEmDashes(title) as string
+    const cleanContent = stripEmDashes(content) as string
+    const cleanExcerpt = stripEmDashes(excerpt)
+
     const result = await c.env.DB.prepare(
       `INSERT INTO posts (title, slug, content, excerpt, category, tags, author, hero_image, status, published_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
     ).bind(
-      title,
+      cleanTitle,
       finalSlug,
-      content,
-      excerpt || null,
+      cleanContent,
+      cleanExcerpt || null,
       category || null,
       tags ? (typeof tags === 'string' ? tags : JSON.stringify(tags)) : null,
       author,
@@ -248,6 +259,9 @@ app.put('/api/admin/posts/:id', adminAuth, async (c) => {
         fields.push(`${key} = ?`)
         if (key === 'tags' && typeof val !== 'string') {
           values.push(JSON.stringify(val))
+        } else if (['title', 'content', 'excerpt'].includes(key) && typeof val === 'string') {
+          // Strip em dashes from text fields on every update
+          values.push(stripEmDashes(val))
         } else {
           values.push(val)
         }
