@@ -538,4 +538,43 @@ function scoreToGrade(score?: number): string {
   return 'F'
 }
 
+// ─── Newsletters ───────────────────────────────────────────────────────────
+
+// List newsletters (admin)
+app.get('/api/admin/newsletters', adminAuth, async (c) => {
+  const db = c.env.DB;
+  const { results } = await db.prepare(
+    'SELECT id, subject, date_range, status, created_at, sent_at FROM newsletters ORDER BY id DESC'
+  ).all();
+  return c.json({ newsletters: results });
+});
+
+// Create newsletter (admin)
+app.post('/api/admin/newsletters', adminAuth, async (c) => {
+  const body = await c.req.json();
+  const { subject, date_range, full_html, status = 'draft' } = body;
+  if (!subject || !date_range || !full_html) {
+    return c.json({ error: 'subject, date_range, full_html required' }, 400);
+  }
+  const result = await c.env.DB.prepare(
+    'INSERT INTO newsletters (subject, date_range, full_html, status) VALUES (?, ?, ?, ?) RETURNING id'
+  ).bind(subject, date_range, full_html, status).first();
+  return c.json({ success: true, id: result?.id });
+});
+
+// Get single newsletter (admin)
+app.get('/api/admin/newsletters/:id', adminAuth, async (c) => {
+  const id = c.req.param('id');
+  const row = await c.env.DB.prepare('SELECT * FROM newsletters WHERE id = ?').bind(id).first();
+  if (!row) return c.json({ error: 'Not found' }, 404);
+  return c.json({ newsletter: row });
+});
+
+// Approve newsletter
+app.post('/api/admin/newsletters/:id/approve', adminAuth, async (c) => {
+  const id = c.req.param('id');
+  await c.env.DB.prepare("UPDATE newsletters SET status = 'approved' WHERE id = ?").bind(id).run();
+  return c.json({ success: true });
+});
+
 export default app
